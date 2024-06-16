@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .navbar {
+            width: 100%;
+            background-color: #ac4f4f;
+            overflow: auto;
+        }
+
+        .navbar a {
+            float: left;
+            text-align: center;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #6311af;
+        }
+
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .container button {
+            background-color: #ac4f4f;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .container button:hover {
+            background-color: #6311af;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home page</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> My Profile</a>
+    </div>
+
+    <div class="container">
+        <button onclick="location.href='make_trip.html'"><i class="fa fa-fw fa-plane"></i> Make a Trip</button>
+        <button onclick="location.href='book_trip.html'"><i class="fa fa-fw fa-calendar"></i> Book a Trip</button>
+    </div>
+
+</body>
+</html>

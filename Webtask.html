@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web-based Application Form</title>
+    <style>
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid red; /* Red border with visible thickness */
+            border-radius: 10px; /* Optional: to give rounded corners */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align form elements to the left */
+        }
+        form label  {
+            width: 100%; /* Make label and input take full width of the container */
+        }
+
+        form input{
+            width:30%;
+        }
+        form button {
+            align-self: center; /* Center the submit button */
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="body">
+        <form id="signupForm">
+            <label for="name">Name:</label><br>
+            <input type="text" id="Name" name="Name" required><br>
+            <br>
+            <label for="contact">Contact:</label><br>
+            <input type="text" id="Contact" name="Contact" required><br>
+            <br>
+            <label for="department">Department:</label><br>
+            <input type="text" name="Department" required><br>
+            <br><br>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+</body>
+</html>
