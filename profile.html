@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid red;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .form-field {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-field input {
+            width: 100%;
+        }
+        .btn {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .profile-box {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="body">
+        <h4>My Profile</h4>
+        <div class="profile-box">
+            <img id="profilePhoto" class="profile-img" src="uploads/default_profile.jpeg" alt="">
+        </div>
+        <form id="profileForm" action="update_profile.php" method="POST" enctype="multipart/form-data">
+            <div class="form-field">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-field">
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" required>
+            </div>
+
+            <div class="form-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-field">
+                <label for="profile_photo">Profile Photo:</label>
+                <input type="file" id="profile_photo" name="profile_photo">
+            </div>
+
+            <button class="btn" type="submit">Save Changes</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    fetch('get_user_data.php')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('name').value = data.name;
+        document.getElementById('phone_number').value = data.phone_number;
+        document.getElementById('email').value = data.email;
+        if (data.profile_photo) {
+            document.getElementById('profilePhoto').src = data.profile_photo;
+        }
+    });
+
+    // Handle form submission
+    document.getElementById('profileForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Create FormData object to send with the fetch request
+        let formData = new FormData(this);
+
+        // Fetch request to update profile
+        fetch('update_profile.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update profile photo if available in response
+            if (data.profile_photo) {
+                document.getElementById('profilePhoto').src = data.profile_photo;
+            }
+
+            // Optionally display a success message or handle other UI updates
+        })
+        .catch(error => {
+            console.error('Error updating profile:', error);
+            // Handle errors if needed
+        });
+    });
+});
+
+    </script>
+</body>
+</html>

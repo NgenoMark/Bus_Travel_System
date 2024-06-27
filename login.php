@@ -5,7 +5,6 @@ $servername = "localhost";
 $username = "root";  // Adjust if necessary
 $password = "";  // Adjust if necessary
 $dbname = "bus_commuter";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 

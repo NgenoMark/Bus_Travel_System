@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $stmt->error;
     }
 
-    $stmt->close();
+    $stmt->close();a
     $conn->close();
 }
 ?>

@@ -6,10 +6,24 @@
         .container {
             width: 300px;
             margin: auto;
+            padding: 20px;
+            border: 2px solid red; /* Red border with visible thickness */
+        }
+        .form-field {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-field input {
+            width: 100%;
         }
         .btn {
             display: block;
-            margin-top: 20px;
+            margin: 20px auto;
+            text-align: center;
         }
     </style>
 </head>
@@ -17,23 +31,38 @@
     <center>
         <div class="container" id="body">
             <h4>Create Account</h4>
-            <form id="signupForm" action="register.php" method="POST">
-                <label for="firstname">Firstname:</label><br>
-                <input type="text" id="firstname" name="firstname" required><br><br>
+            <form id="signupForm" action="register.php" method="POST" enctype="multipart/form-data">
+                <div class="form-field">
+                    <label for="firstname">Firstname:</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="lastname">Lastname:</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                </div>
 
-                <label for="lastname">Lastname:</label><br>
-                <input type="text" id="lastname" name="lastname" required><br><br>
+                <div class="form-field">
+                    <label for="phonenumber">Phone Number:</label>
+                    <input type="text" id="phonenumber" name="phonenumber" required>
+                </div>
 
-                <label for="phonenumber">Phone Number:</label><br>
-                <input type="text" id="phonenumber" name="phonenumber" required><br><br>
+                <div class="form-field">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" required><br><br>
+                <div class="form-field">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
 
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required><br><br>
+                <div class="form-field">
+                    <label for="profile_photo">Profile Photo:</label>
+                    <input type="file" id="profile_photo" name="profile_photo" required>
+                </div>
 
-                <button type="submit">Sign Up</button>
+                <button class="btn" type="submit">Sign Up</button>
             </form>
         </div>
 
