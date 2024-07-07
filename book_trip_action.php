@@ -14,7 +14,6 @@ if ($conn->connect_error) {
 
 // Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
     $name = $_POST['name'];
     $location = $_POST['location'];
     $price = $_POST['price'];
@@ -23,11 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $payment = $_POST['payment'];
     $pickup = $_POST['pickup'];
 
-    // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO bookings (name, location, price, date, time, payment, pickup) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssdssss", $name, $location, $price, $date, $time, $payment, $pickup);
+    $sql = "INSERT INTO bookings (name, location, price, date, time, payment_method, pickup_stage) VALUES ('$name', '$location', '$price', '$date', '$time', '$payment', '$pickup')";
 
-    if ($stmt->execute()) {
+
+    if ($conn->query($sql) === TRUE) {
         // Redirect to display page with query parameters
         header("Location: display_trip.php?name=$name&location=$location&price=$price&date=$date&time=$time&payment=$payment&pickup=$pickup&type=booking");
         exit();
@@ -35,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $stmt->error;
     }
 
-    $stmt->close();
+    //$stmt->close();
     $conn->close();
 }
 ?>

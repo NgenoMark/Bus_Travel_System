@@ -5,6 +5,7 @@ $servername = "localhost";
 $username = "root";  // Adjust if necessary
 $password = "";  // Adjust if necessary
 $dbname = "bus_commuter";
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -15,34 +16,37 @@ if ($conn->connect_error) {
 
 // Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Prepare and execute SQL statement
+    // Prepare and execute query
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Check if user exists and verify password
+    // Check if user exists
     if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-        if (password_verify($password, $user['password'])) {
-            // Password is correct, start a session and redirect to Webtask.html
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['user_name'] = $user['name'];
-            header("Location: Welcome.html");
+        $row = $result->fetch_assoc();
+
+        // Verify the password
+        if (password_verify($password, $row['password'])) {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['role'] = $row['role'];
+
+            if ($row['role'] == 'admin') {
+                header("Location: admin.html");
+            } else {
+                header("Location: welcome.html");
+            }
             exit();
         } else {
-            echo "Incorrect password.";
+            echo "Invalid email or password";
         }
     } else {
-        echo "No user found with that email.";
+        echo "Invalid email or password";
     }
-
     $stmt->close();
 }
-
 $conn->close();
 ?>

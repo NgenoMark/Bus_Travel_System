@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<html>
-    <head>
-        <style>
-            body {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
@@ -18,121 +14,173 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            height: 100vh; /* Adjust this if you want the image to fit the entire viewport height */
-        }
-            .navbar {
-                width: 100%;
-                height: 70px;
-                background-color: #333;
-                overflow: hidden;
-            }
-    
-            .navbar a, .navbar button {
-                float: left;
-                display: block;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-                font-size: 17px;
-                border: none;
-                background: none;
-                cursor: pointer;
-            }
-    
-            .navbar a:hover, .navbar button:hover {
-                background-color: #ddd;
-                color: black;
-            }
-    
-            .navbar a.active {
-                background-color: #04AA6D;
-                color: white;
-            }
-    
-            .navbar .right {
-                float: right;
-            }
-            .content h1 {
-            color: white; /* Specifically targets the h1 element */
-        }
-        .content p1 {
             color: white;
         }
-        </style>
-    </head>
-    <body>
-        <div class="navbar">
-            <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home page</a>
-            <a href="about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
-            <a href="services.html"><i class="fa fa-fw fa-briefcase"></i> Services</a>
-            <a href="contact.html"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-            <!--<a href="profile.html"><i class="fa fa-fw fa-user"></i> My Profile</a> -->
-            <button class="right">Login</button>
-            <button class="right">Register</button>
-        </div>
-    </body>
-    <script src="scripts.js"></script>
-    <script>
-        document.getElementById("LoginButton").onclick = function () {
-            window.location.href = "Welcome.html";
-        };
-    </script>
-
-    
-
-    <!-- Main content of the page -->
-    <div class="content">
-        <h1>Welcome to My Website</h1>
-        <p1>Here is some content for the home page.</p1>
-    </div>
-
-    <script src="scripts.js"></script>
-    <!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-    <style>
-        .container {
-            width: 300px;
-            margin: auto;
+        .navbar {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            padding: 10px 0;
         }
-        .imgcontainer {
+        .navbar a, .navbar button {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .navbar a:hover, .navbar button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .navbar a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+        .navbar .right {
+            float: right;
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .hero h1 {
+            font-size: 4em;
+            margin: 0;
+            animation: fadeIn 2s;
+        }
+        .hero p {
+            font-size: 1.5em;
+            margin: 20px 0;
+            animation: fadeIn 3s;
+        }
+        .hero button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #04AA6D;
+            border: none;
+            cursor: pointer;
+            animation: fadeIn 4s;
+        }
+        .hero button:hover {
+            background-color: #031;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .section {
+            padding: 50px;
             text-align: center;
         }
-        .avatar {
-            width: 50%;
-            border-radius: 50%;
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .section p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .section button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #04AA6D;
+            border: none;
+            cursor: pointer;
+        }
+        .section button:hover {
+            background-color: #031;
+        }
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            padding: 20px 0;
+        }
+        .footer-content {
+            color: white;
+        }
+        .footer-content a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+        .social-media a {
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <center>
-        <form action="login.php" method="post">
-            <div class="imgcontainer">
-                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+    <div class="navbar">
+        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+        <a href="about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
+        <a href="services.html"><i class="fa fa-fw fa-briefcase"></i> Services</a>
+        <a href="contact.html"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+        <button class="right" id="loginButton">Login</button>
+        <button class="right" id="registerButton">Register</button>
+    </div>
+
+    <div class="hero">
+        <h1>Welcome to My Website</h1>
+        <p>Here is some content for the home page.</p>
+        <button>Get Started</button>
+    </div>
+
+    <div class="section" id="about">
+        <h2>About Us</h2>
+        <p>We are a company dedicated to providing the best services for our customers. Our mission is to ensure your satisfaction and comfort.</p>
+        <button onclick="location.href='about.html'">Learn More</button>
+    </div>
+
+    <div class="section" id="services">
+        <h2>Our Services</h2>
+        <p>We offer a wide range of services to meet your needs. Whether you're looking for travel, booking, or event planning, we have you covered.</p>
+        <button onclick="location.href='services.html'">View Services</button>
+    </div>
+
+    <div class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Have questions? Reach out to us, and we'll be happy to assist you. We are here to help you 24/7.</p>
+        <button onclick="location.href='contact.html'">Contact Now</button>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+            <p>
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#terms">Terms of Service</a> | 
+                <a href="#contact">Contact Us</a>
+            </p>
+            <div class="social-media">
+                <a href="#facebook">Facebook</a> | 
+                <a href="#twitter">Twitter</a> | 
+                <a href="#instagram">Instagram</a>
             </div>
+        </div>
+    </footer>
 
-            <div class="container">
-                <big><label for="email"><b>Email</b></label></big><br>
-                <input type="email" placeholder="Enter Email" name="email" required><br>
-
-                <label for="password"><b>Password</b></label><br>
-                <input type="password" placeholder="Enter Password" name="password" required><br>
-
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1">
-                <span class="psw">Forgot <a href="#">password?</a></span><br>
-                <button type="submit">Login</button>
-            </div>
-        </form>
-    </center>
-</body>
-</html>
-
+    <script>
+        document.getElementById("loginButton").onclick = function () {
+            window.location.href = "login.html";
+        };
+        document.getElementById("registerButton").onclick = function () {
+            window.location.href = "register.html";
+        };
+    </script>
 </body>
 </html>

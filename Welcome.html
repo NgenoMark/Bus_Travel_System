@@ -1,30 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>User Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our Bus Travel System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("Image.jpg"); /* Adjust the path to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            color: white;
+        }
         .navbar {
             width: 100%;
-            background-color: #ac4f4f;
+            background-color: rgba(0, 0, 0, 0.7);
             overflow: auto;
+            padding: 10px 0;
         }
 
-        .navbar a {
-            float: left;
+        .navbar a, .navbar button {
             text-align: center;
             padding: 12px;
             color: white;
             text-decoration: none;
             font-size: 17px;
+            border: none;
+            background: none;
+            cursor: pointer;
         }
 
-        .navbar a:hover {
+        .navbar a:hover, .navbar button:hover {
             background-color: #6311af;
         }
 
+        .navbar a.active {
+            background-color: #04AA6D;
+        }
+
+        .navbar .left {
+            float: left;
+        }
+
+        .navbar .right {
+            float: right;
+        }
+
         .container {
-            margin-top: 50px;
+            margin-top: 100px;
             text-align: center;
         }
 
@@ -41,78 +69,51 @@
         .container button:hover {
             background-color: #6311af;
         }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .footer-content {
+            color: white;
+        }
+
+        .footer-content a {
+            color: white;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+
+        .social-media a {
+            margin: 0 5px;
+        }
     </style>
 </head>
 <body>
 
     <div class="navbar">
-        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home page</a>
-        <a href="profile.html"><i class="fa fa-fw fa-user"></i> My Profile</a>
+        <a class="left active" href="#"><i class="fa fa-fw fa-home"></i> Home page</a>
+        <button id="logoutButton" class="right"><i class="fa fa-fw fa-sign-out"></i> Logout</button>
+
+        <a class="right" href="profile.html"><i class="fa fa-fw fa-user"></i> My Profile</a>
     </div>
 
     <div class="container">
+        <h1>Welcome to Our Bus Travel System</h1>
+        <p>Plan your trips effortlessly with our easy-to-use system. Enjoy a smooth and comfortable journey with us.</p>
         <button onclick="location.href='make_trip.html'"><i class="fa fa-fw fa-plane"></i> Make a Trip</button>
         <button onclick="location.href='book_trip.html'"><i class="fa fa-fw fa-calendar"></i> Book a Trip</button>
     </div>
 
-</body>
-</html>
-<br>this is my welcome.php upon login . On clicking My profile is hould be redirected to the profile.html page . In this page i should be able to view my personal information and i should be able to edit this information .</br>
-
-
-
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logout Button</title>
-</head>
-
-
-<body>
-  <center>  <button id="Logoutbtn" type="button">Logout</button></center>
-
-    <script>
-        document.getElementById('Logoutbtn').addEventListener('click', function() {
-            // Perform any logout actions here, if needed
-
-            // Redirect to the home page
-            window.location.href = 'Home page.html'; // Adjust the path as needed
-        });
-    </script>
-</body>
-
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer Example</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-
-
-
-
-
-
-
-
-
-
-<center>
-<body>
-    <!-- Main content of the page -->
-    <div class="content">
-        <h1>Welcome to My Website</h1>
-        <p>Here is some content for the page.</p>
-    </div>
-    
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -129,10 +130,14 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            // Perform any logout actions here, if needed
+
+            // Redirect to the home page
+            window.location.href = 'Home page.html'; // Adjust the path as needed
+        });
+    </script>
 </body>
-</center>
-
-
-
 </html>
-
