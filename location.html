@@ -1,0 +1,152 @@
+
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        select {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select a Car Route and Location</h1>
+    <table>
+        <tr>
+            <th>Car Route</th>
+            <th>Location</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <td>
+                <select id="route" onchange="updateRoute()">
+                    <option value="">--Select a Route--</option>
+                    <option value="michael">Michael</option>
+                    <option value="chumba">Chumba</option>
+                </select>
+            </td>
+            <td>
+                <select id="location" onchange="updatePrice()">
+                    <option value="">--Select a Location--</option>
+                </select>
+            </td>
+            <td id="price">--</td>
+        </tr>
+    </table>
+
+    <script>
+        const prices = {
+            michael: {
+                "kinka stage": "$100",
+                "benedicta": "$200",
+                "AP": "$300",
+                "JSU": "$400",
+                "rounder": "$500",
+                "southfield mall": "$600",
+                "national archives": "$700",
+                "mombasa road": "$800",
+                "rongai": "$900",
+                "kayole": "$1000",
+                "ruiru": "$1100",
+                "Thika": "$1200",
+                "kenyata university": "$1300",
+                "jkwat": "$1400",
+                "kawangware": "$1500"
+            },
+            chumba: {
+                "kinka stage": "$110",
+                "benedicta": "$220",
+                "AP": "$330",
+                "JSU": "$440",
+                "rounder": "$550",
+                "southfield mall": "$660",
+                "national archives": "$770",
+                "mombasa road": "$880",
+                "rongai": "$990",
+                "kayole": "$1100",
+                "ruiru": "$1210",
+                "Thika": "$1320",
+                "kenyata university": "$1430",
+                "jkwat": "$1540",
+                "kawangware": "$1650"
+            }
+        };
+
+        // Function to update the route
+        function updateRoute() {
+            const selectedRoute = document.getElementById("route").value;
+            const locationSelect = document.getElementById("location");
+            const priceCell = document.getElementById("price");
+
+            // Clear the location dropdown
+            locationSelect.innerHTML = '<option value="">--Select a Location--</option>';
+
+            // Populate the location dropdown based on the selected route
+            if (selectedRoute) {
+                for (const location in prices[selectedRoute]) {
+                    const option = document.createElement("option");
+                    option.value = location;
+                    option.text = location;
+                    locationSelect.appendChild(option);
+                }
+                // Restore the saved location if available
+                const savedLocation = localStorage.getItem('selectedLocation');
+                if (savedLocation) {
+                    locationSelect.value = savedLocation;
+                    priceCell.textContent = prices[selectedRoute][savedLocation];
+                } else {
+                    priceCell.textContent = "--";
+                }
+                localStorage.setItem('selectedRoute', selectedRoute);
+            } else {
+                priceCell.textContent = "--";
+            }
+
+            updatePrice();
+        }
+
+        // Function to update the price based on the selected location
+        function updatePrice() {
+            const selectedRoute = document.getElementById("route").value;
+            const selectedLocation = document.getElementById("location").value;
+            const priceCell = document.getElementById("price");
+
+            if (selectedRoute && selectedLocation) {
+                priceCell.textContent = prices[selectedRoute][selectedLocation];
+                localStorage.setItem('selectedLocation', selectedLocation);
+            } else {
+                priceCell.textContent = "--";
+                localStorage.removeItem('selectedLocation');
+            }
+        }
+
+        // Function to load the saved route and location when the page loads
+        function loadSavedPreferences() {
+            const savedRoute = localStorage.getItem('selectedRoute');
+            const savedLocation = localStorage.getItem('selectedLocation');
+
+            if (savedRoute) {
+                document.getElementById("route").value = savedRoute;
+                updateRoute();
+            }
+
+            if (savedLocation) {
+                document.getElementById("location").value = savedLocation;
+                updatePrice();
+            }
+        }
+
+        // Load the saved route and location when the page loads
+        window.onload = loadSavedPreferences;
+    </script>
+</body>
+</html>

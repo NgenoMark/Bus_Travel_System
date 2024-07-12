@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Trip</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .container label {
+            display: block;
+            margin-top: 10px;
+        }
+        .container input, .container select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #6200ee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Make a Trip</h2>
+        <form action="make_trip_action.php" method="post">
+            <label for="name">name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="car_preference">car_preference:</label>
+            <select id="route" name="route" onchange="updateRoute()" required>
+                <option value="">--Select a Car Preference--</option>
+                <option value="michael">michael</option>
+                <option value="chumba">chumba</option>
+            </select>
+
+            <label for="location">Location:</label>
+            <select id="location" name="location" onchange="updatePrice()" required>
+                <option value="">--Select a Location--</option>
+            </select>
+
+            <label for="pickup_stage">pickup_stage:</label>
+            <input type="text" id="pickup_stage" name="pickup_stage" required>
+
+            <label for="seat_number">seat_number:</label>
+            <select id="seat_number" name="seat_number" required>
+                <option value="">--Select a Seat--</option>
+            </select>
+
+            <label for="phone_number">phone_number:</label>
+            <input type="tel" id="phone_number" name="phone_number" required>
+
+            <label for="paid_amount">paid_amount:</label>
+            <input type="number" id="paid_amount" name="paid_amount" required readonly>
+
+            <label for="date">date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <button type="submit">Make Trip</button>
+        </form>
+    </div>
+
+    <script>
+        const prices = {
+            michael: {
+                "kinka stage": "$100",
+                "benedicta": "$200",
+                "AP": "$300",
+                "JSU": "$400",
+                "rounder": "$500",
+                "southfield mall": "$600",
+                "national archives": "$700",
+                "mombasa road": "$800",
+                "rongai": "$900",
+                "kayole": "$1000",
+                "ruiru": "$1100",
+                "Thika": "$1200",
+                "kenyata university": "$1300",
+                "jkwat": "$1400",
+                "kawangware": "$1500"
+            },
+            chumba: {
+                "kinka stage": "$110",
+                "benedicta": "$220",
+                "AP": "$330",
+                "JSU": "$440",
+                "rounder": "$550",
+                "southfield mall": "$660",
+                "national archives": "$770",
+                "mombasa road": "$880",
+                "rongai": "$990",
+                "kayole": "$1100",
+                "ruiru": "$1210",
+                "Thika": "$1320",
+                "kenyata university": "$1430",
+                "jkwat": "$1540",
+                "kawangware": "$1650"
+            }
+        };
+
+        function updateRoute() {
+            const selectedRoute = document.getElementById("route").value;
+            const locationSelect = document.getElementById("location");
+
+            // Clear the location dropdown
+            locationSelect.innerHTML = '<option value="">--Select a Location--</option>';
+
+            // Populate the location dropdown based on the selected route
+            if (selectedRoute) {
+                for (const location in prices[selectedRoute]) {
+                    const option = document.createElement("option");
+                    option.value = location;
+                    option.text = location;
+                    locationSelect.appendChild(option);
+                }
+            }
+
+            updatePrice();
+        }
+
+        function updatePrice() {
+            const selectedRoute = document.getElementById("route").value;
+            const selectedLocation = document.getElementById("location").value;
+            const priceCell = document.getElementById("paid_amount");
+
+            if (selectedRoute && selectedLocation) {
+                priceCell.value = parseFloat(prices[selectedRoute][selectedLocation].substring(1));
+            } else {
+                priceCell.value = "";
+            }
+        }
+
+        function fetchBookedSeats(route, location) {
+            // Example of an AJAX call to fetch booked seats. Replace with actual AJAX call.
+            return new Promise((resolve) => {
+                // Simulate a server response with some booked seats
+                const bookedSeats = {
+                    "michael": {
+                        "kinka stage": [1, 2, 3],
+                        "benedicta": [4, 5, 6]
+                        // Add more locations and booked seats
+                    },
+                    "chumba": {
+                        "kinka stage": [7, 8, 9],
+                        "benedicta": [10, 11, 12]
+                        // Add more locations and booked seats
+                    }
+                };
+                setTimeout(() => {
+                    resolve(bookedSeats[route][location] || []);
+                }, 1000);
+            });
+        }
+
+        function updateSeatNumbers() {
+            const route = document.getElementById("route").value;
+            const location = document.getElementById("location").value;
+            const seatNumberSelect = document.getElementById("seat_number");
+
+            // Clear the seat number dropdown
+            seatNumberSelect.innerHTML = '<option value="">--Select a Seat--</option>';
+
+            if (route && location) {
+                fetchBookedSeats(route, location).then(bookedSeats => {
+                    const totalSeats = 20; // Example: total number of seats in the vehicle
+                    for (let i = 1; i <= totalSeats; i++) {
+                        if (!bookedSeats.includes(i)) {
+                            const option = document.createElement("option");
+                            option.value = i;
+                            option.text = i;
+                            seatNumberSelect.appendChild(option);
+                        }
+                    }
+                });
+            }
+        }
+
+        // Event listeners to update seat numbers
+        document.getElementById("route").addEventListener("change", updateSeatNumbers);
+        document.getElementById("location").addEventListener("change", updateSeatNumbers);
+
+        window.onload = function() {
+            const dateInput = document.getElementById('date');
+            const today = new Date();
+            today.setDate(today.getDate() + 1);
+            const year = today.getFullYear();
+            const month = ('0' + (today.getMonth() + 1)).slice(-2);
+            const day = ('0' + today.getDate()).slice(-2);
+            const minDate = `${year}-${month}-${day}`;
+            dateInput.setAttribute('min', minDate);
+        };
+    </script>
+</body>
+</html>
